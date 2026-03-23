@@ -6,12 +6,6 @@ IT University of Copenhagen
 
 Mircea Lungu
 
-<a href="https://github.com/mircealungu/reconstruction">github.com/mircealungu/reconstruction</a>
-
-
-
-
-
 
 ## Imagine ... 
 

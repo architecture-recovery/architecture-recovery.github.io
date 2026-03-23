@@ -66,7 +66,7 @@ if [ "$1" = "--non-interactive" ]; then
     git push --quiet
     echo "Pushed."
 else
-    git diff --stat HEAD
+    git --no-pager diff --stat HEAD
     echo ""
     read -p "Commit and push? (y/n) " answer
     if [ "$answer" = "y" ]; then
