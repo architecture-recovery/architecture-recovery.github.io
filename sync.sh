@@ -3,8 +3,8 @@
 cd "$(dirname "$0")"
 [ -f ~/.local_envvars.sh ] && source ~/.local_envvars.sh
 
-SRC="$ARCH_REC_IN_MEGAVAULT"
-DST="$ARCH_REC_IN_GH_FOLDER"
+SRC="$ARCH_REC_VAULT"
+DST="$ARCH_REC_REPO"
 
 # Sync only files listed in .published
 while IFS= read -r entry; do
