@@ -16,11 +16,30 @@ while IFS= read -r entry; do
     fi
 done < "$SRC/_published.md"
 
+# Remove tracked files that are no longer in _published.md
+KEEP_FILES=$(grep -v '^$' "$SRC/_published.md")
+for tracked in $(git ls-files); do
+    # Skip special files
+    [[ "$tracked" == "sync.sh" || "$tracked" == ".gitignore" ]] && continue
+    # Check if tracked file (or its parent dir) is in the published list
+    found=false
+    while IFS= read -r entry; do
+        [ -z "$entry" ] && continue
+        if [[ "$tracked" == "$entry" || "$tracked" == "$entry/"* ]]; then
+            found=true
+            break
+        fi
+    done <<< "$KEEP_FILES"
+    if ! $found; then
+        git rm -q "$tracked" 2>/dev/null
+    fi
+done
+
 # Check for new untracked files
 NEW_FILES=$(git ls-files --others --exclude-standard)
 
 if [ -n "$NEW_FILES" ]; then
-    if [ "$1" = "--yes" ]; then
+    if [ "$1" = "--non-interactive" ]; then
         echo "New files detected — run interactive sync to review:"
         echo "$NEW_FILES"
         exit 1
@@ -41,14 +60,13 @@ if [ -z "$MODIFIED_FILES" ] && [ -z "$(git diff --name-only --cached HEAD)" ]; t
     exit 0
 fi
 
-if [ "$1" = "--yes" ]; then
+if [ "$1" = "--non-interactive" ]; then
     echo "Changed: $MODIFIED_FILES"
     git commit -am "update" --quiet
     git push --quiet
     echo "Pushed."
 else
-    echo "Modified files:"
-    echo "$MODIFIED_FILES"
+    git diff --stat HEAD
     echo ""
     read -p "Commit and push? (y/n) " answer
     if [ "$answer" = "y" ]; then
