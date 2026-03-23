@@ -14,7 +14,7 @@ while IFS= read -r entry; do
     elif [ -f "$SRC/$entry" ]; then
         rsync -a "$SRC/$entry" "$DST/$entry"
     fi
-done < "$SRC/.published"
+done < "$SRC/_published.md"
 
 # Check for new untracked files
 NEW_FILES=$(git ls-files --others --exclude-standard)

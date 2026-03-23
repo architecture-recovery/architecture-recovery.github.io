@@ -1,8 +1,8 @@
-# Architecture Recovery
-
-Course materials for the Architecture Reconstruction sessions from the Software Architecture course at the IT University of Copenhagen.
+# The Software Architecture Recovery Course
 
 ## Lectures
+
+Lecture notes for Mircea's three week arc in the Advanced Software Engineering course at ITU.
 
 1. [Introduction](1_Introduction.md)
 2. Abstraction
