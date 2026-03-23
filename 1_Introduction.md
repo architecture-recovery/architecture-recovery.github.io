@@ -6,7 +6,6 @@ IT University of Copenhagen
 
 Mircea Lungu
 
-
 ## Imagine ... 
 
 - Onboarding on a new system
@@ -20,13 +19,7 @@ Riddle:  What would be nice to have in all these circumstances but we almost nev
 Helper: What is the software artifact that you are not guaranteed to have, not even when paying 50B for a company?
 
 
-
-
-
-
-
-
-## An up-to-date architectural diagram 
+## Answer: An up-to-date architectural diagram 
 
 
 

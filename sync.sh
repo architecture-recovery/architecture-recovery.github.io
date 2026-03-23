@@ -60,9 +60,10 @@ if [ -z "$MODIFIED_FILES" ] && [ -z "$(git diff --name-only --cached HEAD)" ]; t
     exit 0
 fi
 
+git add -A
 if [ "$1" = "--non-interactive" ]; then
     echo "Changed: $MODIFIED_FILES"
-    git commit -am "update" --quiet
+    git commit -m "update" --quiet
     git push --quiet
     echo "Pushed."
 else
@@ -70,7 +71,7 @@ else
     echo ""
     read -p "Commit and push? (y/n) " answer
     if [ "$answer" = "y" ]; then
-        git commit -am "update"
+        git commit -m "update"
         git push
     fi
 fi
