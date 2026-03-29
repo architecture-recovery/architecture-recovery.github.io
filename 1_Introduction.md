@@ -10,7 +10,7 @@ Mircea Lungu
 
 What is the software artifact that you are not guaranteed to have, not even when paying 50B for a software company?
 
-![](assets/elon-musk-and-the-sink.png)
+![](images/elon-musk-and-the-sink.png)
 
 ### Answer
 An up-to-date architectural diagram.
