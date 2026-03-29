@@ -12,8 +12,10 @@ Mircea Lungu
 
 ![](images/elon-musk-and-the-sink.png)
 
-> [!tip]- Answer
-> An up-to-date architectural diagram.
+<details>
+<summary>Answer</summary>
+An up-to-date architectural diagram.
+</details>
 
 ![](images/twitter_arch_recovered.png)
 [link to original tweet](https://twitter.com/elonmusk/status/1593899029531803649)
