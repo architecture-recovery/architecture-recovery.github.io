@@ -47,8 +47,8 @@ if [ -n "$NEW_FILES" ]; then
         echo "New untracked files:"
         echo "$NEW_FILES"
         echo ""
-        read -p "Add and commit these new files? (y/n) " answer
-        [ "$answer" = "y" ] && git add $NEW_FILES
+        read -p "Add and commit these new files? ([Y]/n) " answer
+        [[ -z "$answer" || "$answer" = "y" || "$answer" = "Y" ]] && git add $NEW_FILES
     fi
 fi
 
@@ -69,8 +69,8 @@ if [ "$1" = "--non-interactive" ]; then
 else
     git --no-pager diff --stat HEAD
     echo ""
-    read -p "Commit and push? (y/n) " answer
-    if [ "$answer" = "y" ]; then
+    read -p "Commit and push? ([Y]/n) " answer
+    if [[ -z "$answer" || "$answer" = "y" || "$answer" = "Y" ]]; then
         git commit -m "update"
         git push
     fi

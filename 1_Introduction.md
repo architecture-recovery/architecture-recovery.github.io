@@ -8,12 +8,12 @@ Mircea Lungu
 
 ## Riddle
 
-What is the software artifact that you are not guaranteed to have, not even when paying 50B for a software company?
+### What is the software artifact that you are not guaranteed to have, not even when paying 50B for a software company?
 
 ![](images/elon-musk-and-the-sink.png)
 
-### Answer
-An up-to-date architectural diagram.
+> [!tip]- Answer
+> An up-to-date architectural diagram.
 
 ![](images/twitter_arch_recovered.png)
 [link to original tweet](https://twitter.com/elonmusk/status/1593899029531803649)
