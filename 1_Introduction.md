@@ -23,7 +23,7 @@ An up-to-date architectural diagram.
 Note: this diagram was *recovered by an outsider*, not produced by the company. Is it still accurate today?
 
 
-## Imagine ...
+## Many Situations Require Understanding a System's Architecture
 
 - Onboarding on a new system
 - Buying a software company
@@ -35,31 +35,31 @@ Note: this diagram was *recovered by an outsider*, not produced by the company. 
 Wouldn't it be good if you had an architectural diagram of the system that was up to date?
 
 
-## Discussion: Have you seen architectural documentation for every system?
+## Architectural Documentation Is Rarely Available or Up to Date
 
 *2 min in pairs, then we collect answers*
 
 ### No
 *Why is it missing?*
 ### Yes
-*Is it up to date? Why not?*
+*Is it up to date? How? Not? Why not?*
 
 
 
-## Why Don't We Have Up-to-Date Architectural Documentation?
+## Few Incentives and Inherent Difficulty Explain the Gap
 
-**Incentives**
+### Few stakeholders prioritize architecture documentation
 - Sometimes that's not a priority at all
 	- You're a startup that needs to show that the idea is viable. You don't have time for anything else.
 - Often there is no perceived value for the customer (or more likely, no clear immediate value)
 
-**Difficulty**
+### Creating and maintaining it is hard
 - Traceability between architecture and code is not easy to establish
 - It requires a better and more general understanding of the system than just coding — not everybody can do it
 - Hard to maintain — especially when they are in .ppt or .png
 
 
-## Architectural Drift and Erosion
+## Even Existing Documentation Drifts from Reality
 
 When architecture documentation *does* exist, it still goes out of date because developers make decisions and changes:
 - that are not aligned with the original vision => **[architectural drift](https://youtu.be/hExflmcBSc4?t=14)**
@@ -74,9 +74,9 @@ When architecture documentation *does* exist, it still goes out of date because 
 
 
 
-## How to Keep Architectural Documentation Up to Date?
+## Three Approaches to Keeping Architecture Current
 
-### Enforcing architectural constraints
+### Enforce constraints so code must match architecture
 
 Specify the architecture, draw it, and then ensure that all new code conforms to it!
 
@@ -90,19 +90,19 @@ Specify the architecture, draw it, and then ensure that all new code conforms to
 		- IDE
 - Declarative architecture: docker compose, swarm stack specifications, infrastructure-as-code specifications, etc.
 
-### Having evolving architectural diagrams
+### Generate diagrams that evolve with the code
 - A research direction that we work on here at ITU
 - Not the focus of this course
 - This course will however, give you the tools for implementing your own evolving diagrams
 
-### Recovering architectural diagrams from code
+### Recover the architecture directly from code
 - As opposed to *drawing them in Powerpoint*
 - No great tools for this — often too much low-level noise
 - **The focus of this course**
 
 
 
-# Architecture Recovery (AR)
+# Architecture Recovery Is Reverse Engineering at the Architectural Level
 
 a.k.a. *architecture reconstruction* (the literature uses both; we use *recovery* in this course)
 
@@ -116,7 +116,7 @@ Reverse engineering = analyzing a system to identify its components, their inter
 
 
 
-## How to Do Architecture Recovery?
+## Symphony Provides a Structured Process for Recovery
 
 [Symphony: View-Driven Software Architecture Reconstruction](https://ipa.win.tue.nl/archive/springdays2005/Deursen1.pdf)
 
@@ -135,7 +135,7 @@ Reverse engineering = analyzing a system to identify its components, their inter
 
 
 
-## Symphony Stages: Design (blue) & Execution (yellow)
+## Symphony Alternates Between Design and Execution Stages
 
 ![](images/symphony.png)
 
@@ -143,15 +143,14 @@ Reverse engineering = analyzing a system to identify its components, their inter
 
 *2 min in pairs: think of a system you know — what would be the "problem elicitation" and "concept determination" for recovering its architecture?*
 
-### Design: Problem elicitation
-- "Business case" for recovery
+### Problem elicitation establishes the business case
 - What is the problem?
 
 ![](images/symphony.png)
 
 
 
-### Design: Concept determination
+### Concept determination identifies needed viewpoints
 
 - What architectural information is needed to solve the problem?
 - **Which viewpoints are relevant?**
@@ -161,33 +160,29 @@ Reverse engineering = analyzing a system to identify its components, their inter
 
 
 
-### Execution: Data gathering
- - Collecting and extracting low-level **source views**
+### Data gathering extracts low-level source views
  - Can involve a multitude of sources even besides source code (e.g., git repo, runtime information)
 
 ![](images/symphony.png)
 
 
 
-### Execution: Knowledge inference
- - Going from **source** to target **views**
+### Knowledge inference abstracts source into target views
  - Abstracting low-level information
 
 ![](images/symphony.png)
 
 
-### Execution: Information interpretation
+### Information interpretation produces documentation
  - Visual representation
  - Analysis, creating new documentation
 
 ![](images/symphony.png)
 
 
-## Data Gathering: Interactive Case Study
+## Source Views Are Not Necessarily Architectural
 
 Example: [Google Collab with Basic Data Gathering](https://colab.research.google.com/drive/1oe_TV7936Zmmzbbgq8rzqFpxYPX7SQHP#scrollTo=0ruTtX88Tb-w)
-
-Or, *why source views are not necessarily architectural?*
 
 
 
