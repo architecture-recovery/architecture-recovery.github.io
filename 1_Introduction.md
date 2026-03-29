@@ -6,48 +6,43 @@ IT University of Copenhagen
 
 Mircea Lungu
 
-## Imagine ... 
+## Riddle
 
-- Onboarding on a new system
-- Buying a software company
-- Having to do 
-	- an architectural evaluation
-	- a risk assessment for security
+Helper: What is the software artifact that you are not guaranteed to have, not even when paying 50B for a software company?
 
-Riddle:  What would be nice to have in all these circumstances but we almost never have?
+![](assets/elon-musk-and-the-sink.png)
 
-Helper: What is the software artifact that you are not guaranteed to have, not even when paying 50B for a company?
-
-
-## Answer: An up-to-date architectural diagram 
-
-
-
-
-
-
-
-
-
-
-
+### Answer
+An up-to-date architectural diagram.
 
 ![](images/twitter_arch_recovered.png)
 [link to original tweet](https://twitter.com/elonmusk/status/1593899029531803649)
 
-## Discussion
+To think about: is that architectural diagram up to date today? 
 
-Have you seen architectural documentation for every system?
+## Imagine ... 
 
-- No, *Why is it missing?* 
-- Yes? 
-	- Is it up to date? 
-	- *No? Why not?* 
+- Onboarding on a new system
+- Buying a software company
+- Doing a PR review
+- Having to do 
+	- an architectural evaluation
+	- a risk assessment for security
+
+Wouldn't it be good if you had an architectural diagram of the system that was up to date? 
+
+
+## Discussion: Have you seen architectural documentation for every system?
+
+
+### No
+*Why is it missing?* 
+### Yes
+- Is it up to date? Why not?* 
  
 
 
-## Why does architectural documentation not always exist and is not up to date?
-
+## Why don't we have  up to date architectural documentation?
 
 Incentives
 - Sometimes that's not a priority at all 
@@ -83,7 +78,7 @@ Why would it be a problem?
 
 ## How to Keep Architectural Documentation up to Date?
 
-1 / **Enforcing architectural constraints** 
+### **Enforcing architectural constraints** 
 - Type systems -- too low-level
 - Special tools for architecture constraints definition
 	- DSL - domain specific language (e.g. [Dictō](https://scg.unibe.ch/archive/papers/Cara14b-Dicto.pdf)) 
@@ -94,15 +89,16 @@ Why would it be a problem?
 		- IDE
 - Declarative architecture: docker compose, swarm stack specifications,  infrastructure-as-code specifications, etc.
 
---
+### Having evolving architectural diagrams
+- A research direction that we work on here at ITU
+- Not the focus of this course
+- This course will however, give you the tools for implementing your own evolving diagrams 
 
-2 / **Generating architectural diagrams from code**
+
+### **Recovering architectural diagrams from code**
 - As opposed to *drawing them in Powerpoint*
 - No great tools for this - often too much low-level noise
-- The focus of: **reconstructing the Architecture**
-
-
-
+- The focus of: **architecture reconstruction**
 
 # Architecture Reconstruction (AR)
 
