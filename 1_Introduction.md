@@ -321,23 +321,21 @@ Each step is a judgment call about what counts as "the system." This is already 
 - Identify code that is no longer called in production
 - Requires combining static analysis (what *could* be called) with dynamic analysis (what *is* called) 
 - Don't just produce a list — abstract the results (e.g., which modules are most affected? are there patterns in what became dead?)
-- For Zeeguu: production endpoint data is available from FMD
-- For other systems: you need access to production usage data — confirm feasibility with me
+- For Zeeguu: production endpoint data is available from [FMD](https://github.com/flask-dashboard/Flask-MonitoringDashboard)
+- For other systems: **you need access to production usage data** — confirm feasibility with me
 
 Both options:
 - Document the outcome in an **individual report**
 	- the target reader is a developer who needs to take over the system and maintain it
 	- brief (not more than 3–5 pages)
 	- do not explain what Symphony does in the report; assume the reader knows it
-	- focus on your results
+	- focus on your results and on explaining it to somebody that does not know the system - keep it at the level where the censor and I will understand your report 
 
-## Tools
+### Tools
 
 - Are important for recovery
 
 - **If you can program**, this is your chance to build analysis tools over the upcoming lectures
-	  - you can still code as a team — you only have to write the analysis on your own
-	  - you don't have to use Collab
 
 - **If you can't program**, you'll develop expertise in evaluating and combining existing analysis tools
 	- the time programmers spend coding, you'll spend finding and comparing third-party tools
@@ -348,7 +346,7 @@ Both options:
 ## Individual Project
 - Choose a case study that you want to analyze
 - Understand the code in [Google Collab with Basic Data Gathering](https://colab.research.google.com/drive/1oe_TV7936Zmmzbbgq8rzqFpxYPX7SQHP#scrollTo=0ruTtX88Tb-w)
-- Create your own GH repo for your own analysis tool - unless you don't know how, then you can clone the Collab and work in it
+- Create your own GH repo for your own analysis code - unless you don't know how, then you can clone the Collab and work in it
 - Apply your analysis on your proposed system and post your source view together with the system size: #arch-recovery-source-views on Discord
 - (Optional) Complete the implementation of the import extractor with a more precise approach than regex
 	- - **If you can program**: use a real AST parser (e.g., Python's `ast` module, JavaScript's `@babel/parser`) for your project — the results will be far more reliable - it's fine to still only at imports; but at least that should be done as well as possible
