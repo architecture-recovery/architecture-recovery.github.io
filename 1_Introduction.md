@@ -25,14 +25,10 @@ Note: this diagram was *recovered by an outsider*, not produced by the company. 
 
 ## Many Situations Require Understanding a System's Architecture
 
-- Onboarding on a new system
-- Buying a software company
-- Doing a PR review
-- Having to do
-	- an architectural evaluation
-	- a risk assessment for security
-
-Wouldn't it be good if you had an architectural diagram of the system that was up to date?
+- Onboarding on a new system — where do you even start?
+- Evaluating a software acquisition — what are you actually buying?
+- Reviewing a change that cuts across components — will it break something?
+- Conducting an architectural evaluation or a security risk assessment
 
 
 ## Architectural Documentation Is Rarely Available or Up to Date
@@ -49,21 +45,22 @@ Wouldn't it be good if you had an architectural diagram of the system that was u
 ## Few Incentives and Inherent Difficulty Explain the Gap
 
 ### Few stakeholders prioritize architecture documentation
-- Sometimes that's not a priority at all
-	- You're a startup that needs to show that the idea is viable. You don't have time for anything else.
+- You're a startup that needs to show that the idea is viable — no time for documentation
 - Often there is no perceived value for the customer (or more likely, no clear immediate value)
 
 ### Creating and maintaining it is hard
 - Traceability between architecture and code is not easy to establish
 - It requires a better and more general understanding of the system than just coding — not everybody can do it
-- Hard to maintain — especially when they are in .ppt or .png
+- Diagrams are hard to maintain — especially when drawn in .ppt or .png
 
 
-## Even Existing Documentation Drifts from Reality
+## Even Existing Documentation Drifts from or Contradicts Reality
 
-When architecture documentation *does* exist, it still goes out of date because developers make decisions and changes:
+Developers make decisions and changes:
 - that are not aligned with the original vision => **[architectural drift](https://youtu.be/hExflmcBSc4?t=14)**
 - that go against prescriptive architecture => **[architectural erosion](https://youtu.be/hExflmcBSc4?t=70)**
+
+(Both terms from Perry & Wolf, [Foundations for the Study of Software Architecture](https://dl.acm.org/doi/10.1145/141874.141884), 1992)
 
 ### Erosion Example
 ![](images/adjacent_connector_.png)
@@ -88,9 +85,9 @@ Specify the architecture, draw it, and then ensure that all new code conforms to
 		- CI/CD
 		- Pre-commit hooks
 		- IDE
-- Declarative architecture: docker compose, swarm stack specifications, infrastructure-as-code specifications, etc.
-
 ### Generate diagrams that evolve with the code
+
+- Declarative architecture: docker compose, infrastructure-as-code — the architecture *is* the code
 - A research direction that we work on here at ITU
 - Not the focus of this course
 - This course will however, give you the tools for implementing your own evolving diagrams
@@ -168,14 +165,14 @@ Reverse engineering = analyzing a system to identify its components, their inter
 
 
 ### Knowledge inference abstracts source into target views
- - Abstracting low-level information
+ - Mapping low-level facts to architectural concepts (e.g., files to modules, calls to dependencies)
 
 ![](images/symphony.png)
 
 
-### Information interpretation produces documentation
- - Visual representation
- - Analysis, creating new documentation
+### Information interpretation turns views into insight
+ - Visual representation of recovered views
+ - Analysis, new documentation, architectural decisions
 
 ![](images/symphony.png)
 
