@@ -206,40 +206,6 @@ Defined by Ducasse & Pollet, [Software Architecture Reconstruction: a Process-Or
 Example: [Google Collab with Basic Data Gathering](https://colab.research.google.com/drive/1oe_TV7936Zmmzbbgq8rzqFpxYPX7SQHP#scrollTo=0ruTtX88Tb-w)
 
 
-*2 min in pairs: What are the limitations of the regex-based import extraction in the Collab? What dependencies could it miss?*
-
-## Import Analysis Misses Many Real Dependencies
-
-The regex approach in the Collab is a starting point, not a complete solution — it will miss aliased imports, conditional imports, re-exports, etc.
-
-
-
-### Even AST-based import analysis won't catch all dependencies
-
-#### Transitive dependencies through method calls
-You import `Bar`, but then call `Bar().baz()` which returns a `Baz` object. Your code now depends on `Baz`'s interface — if `Baz` changes, your code breaks — but your imports only mention `Bar`.
-```python
-from bar_module import Bar
-result = Bar().baz()    # returns a Baz object
-result.do_something()   # depends on Baz's interface — but we never imported it
-```
-
-#### HTTP coupling between services
-In Zeeguu, the API server calls `stanza_service` for tokenization. There's no `import stanza_service` — it's an HTTP request to a URL. But if `stanza_service` goes down, the API breaks.
-
-#### Database-mediated coupling
-Service A writes to a `jobs` table, Service B polls it. Neither imports the other, but they're tightly coupled through the shared table schema.
-
-#### Reflection and dynamic dispatch
-```python
-handler = getattr(module, f"handle_{event_type}")
-handler(data)
-```
-This calls a function based on a runtime string. No static analysis will find that dependency.
-
-
-
-
 ## Measuring System Size Requires Iterative Refinement
 
 on mac: `brew install cloc`
@@ -271,6 +237,38 @@ cloc --include-lang=Python --exclude-dir=venv,site-packages,__pycache__,test,old
 ```
 
 Each step is a judgment call about what counts as "the system." This is already architecture recovery thinking: deciding what's signal and what's noise.
+
+
+*2 min in pairs: What are the limitations of the regex-based import extraction in the Collab? What dependencies could it miss?*
+
+## Import Analysis Misses Many Real Dependencies
+
+The regex approach in the Collab is a starting point, not a complete solution — it will miss aliased imports, conditional imports, re-exports, etc.
+
+
+
+### Even AST-based import analysis won't catch all dependencies
+
+#### Transitive dependencies through method calls
+You import `Bar`, but then call `Bar().baz()` which returns a `Baz` object. Your code now depends on `Baz`'s interface — if `Baz` changes, your code breaks — but your imports only mention `Bar`.
+```python
+from bar_module import Bar
+result = Bar().baz()    # returns a Baz object
+result.do_something()   # depends on Baz's interface — but we never imported it
+```
+
+#### HTTP coupling between services
+In Zeeguu, the API server calls `stanza_service` for tokenization. There's no `import stanza_service` — it's an HTTP request to a URL. But if `stanza_service` goes down, the API breaks.
+
+#### Database-mediated coupling
+Service A writes to a `jobs` table, Service B polls it. Neither imports the other, but they're tightly coupled through the shared table schema.
+
+#### Reflection and dynamic dispatch
+```python
+handler = getattr(module, f"handle_{event_type}")
+handler(data)
+```
+This calls a function based on a runtime string. No static analysis will find that dependency.
 
 
 
