@@ -11,6 +11,8 @@ Mircea Lungu
 - *whoareyou*
 
 
+
+
 ## Riddle
 
 ### What is the software artifact that you are not guaranteed to have, not even when paying 50B for a software company?
@@ -25,8 +27,9 @@ An up-to-date architectural diagram.
 ![](images/twitter_arch_recovered.png)
 [link to original tweet](https://twitter.com/elonmusk/status/1593899029531803649)
 
-Note: this diagram was *recovered by an outsider*, not produced by the company. 
+Note: this diagram was *recovered by an outsider* and his team in a brainstorming session.
 
+Is it accurate?
 Is it still accurate today?
 Is it sufficient? 
 
@@ -52,7 +55,17 @@ Is it sufficient?
 
 
 
-## Few Incentives and Inherent Difficulty Explain the Gap
+
+
+
+
+
+
+
+
+
+
+## Few Incentives and Inherent Difficulty for Creation and Maintenance
 
 ### Rarely do stakeholders prioritize architecture documentation
 
@@ -66,7 +79,7 @@ Is it sufficient?
 - Diagrams are hard to maintain — especially when drawn in .ppt or .png
 
 
-## Even Existing Documentation Drifts from or Contradicts Reality
+## Existing Documentation Drifts from or Contradicts Reality
 
 Developers make decisions and changes:
 - that are not aligned with the original vision => **[architectural drift](https://youtu.be/hExflmcBSc4?t=14)**
@@ -81,6 +94,7 @@ Developers make decisions and changes:
 | Analogy                           | Getting lost without a map | Having a map and ignoring it   |
 
 ### Many Well-Known Systems Drifted into What They Are Today
+
 - **Linux kernel** — **started monolithic**, gradually absorbed loadable modules, drifting toward a **hybrid kernel** through thousands of pragmatic decisions
 - **WordPress** — began as a blogging engine, drifted into a **general-purpose CMS and e-commerce platform** via plugins and custom post types
 - **Eclipse** — **started as a Java** IDE, drifted into a "**platform for anything**" because the plugin architecture was too flexible to constrain
@@ -116,11 +130,10 @@ Specify the architecture (draw it, formalize it), and then ensure that all new c
 
 - Declarative architecture: docker compose, infrastructure-as-code — the architecture *is* the code
 - A research direction that we work on here at ITU
-- Not the focus of this course
 - This course will however, give you the tools for implementing your own evolving diagrams
 
 ### Reactive: Recover the architecture directly from code
-- As opposed to *drawing them in Powerpoint*
+- As opposed to *drawing them in Powerpoint* or with `draw.io`
 - No great tools for this — often too much low-level noise
 - **The focus of this course** (and the thesis of Babette and Lotte :)
 
@@ -245,6 +258,15 @@ Each step is a judgment call about what counts as "the system." This is already 
 
 The regex approach in the Collab is a starting point, not a complete solution — it will miss aliased imports, conditional imports, re-exports, etc.
 
+### AST = abstract syntax tree
+- structured representation of a program
+- throws away spaces
+- throws away comments
+- keeps only a data structure that represents your code
+- every file will have it's AST
+- every language will have a library for building ASTs
+- in python it's called `ast`
+
 
 
 ### Even AST-based import analysis won't catch all dependencies
@@ -304,11 +326,12 @@ This calls a function based on a runtime string. No static analysis will find th
 
 #### Case-Study System
 
-1. **A system that you know** (preferred)
-	- Comparable complexity (>10k lines of code; use `cloc` to check)
-	- To confirm appropriateness: post your `cloc` output and initial import graph on `#arch-recovery-source-views`
+1. **A system that you know** (preferred — you'll learn more analyzing something you're curious about)
+	- Comparable complexity (>50k lines of code; use `cloc` to check)
+	- Post your `cloc` output and initial source view on `#arch-recovery-source-views` by the next meeting
+	- If you don't post by then, you'll work on Zeeguu
 
-2. The Zeeguu Project (fallback — if you don't have a system of your own)
+2. The Zeeguu Project (default)
 	- [zeeguu.org](https://zeeguu.com) (invite code: zeeguu-preview)
 	- Code:
 		- Python Backend: [Zeeguu-API](https://github.com/zeeguu/API)
