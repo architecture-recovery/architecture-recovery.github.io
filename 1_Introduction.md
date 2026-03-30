@@ -123,23 +123,24 @@ Specify the architecture (draw it, formalize it), and then ensure that all new c
 
 # Architecture Recovery Is Reverse Engineering at the Architectural Level
 
-a.k.a. *architecture reconstruction* (the literature uses both; we use *recovery* in this course)
+## Reverse engineering = analyzing a system to identify its components, their interrelationships, and create representations at a higher level of abstraction. 
 
-**(def.)** A reverse engineering approach that aims at recovering viable architectural views of a software application. [1]
-
-Reverse engineering = analyzing a system to identify its components, their interrelationships, and create representations at a higher level of abstraction. [2]
-
-[1] Ducasse & Pollet, [Software Architecture Reconstruction: a Process-Oriented Taxonomy](https://rmod.inria.fr/archives/papers/Duca09c-TSE-SOAArchitectureExtraction.pdf)
-
-[2] Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf), Chapter 1.2
+Introduced by Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf), Chapter 1.2
 
 
+## Architecture Recovery = **(def.)** A reverse engineering approach that aims at recovering viable architectural views of a software application.
 
-## Symphony Provides a Structured Process for Recovery
+Defined by Ducasse & Pollet, [Software Architecture Reconstruction: a Process-Oriented Taxonomy](https://rmod.inria.fr/archives/papers/Duca09c-TSE-SOAArchitectureExtraction.pdf)
+
+## Architecture Recovery is a.k.a. *architecture reconstruction* 
+- the literature uses both; we use *recovery* in this course
+
+
+## The Symphony Process Provides a Structured Approach to Recovery
 
 [Symphony: View-Driven Software Architecture Reconstruction](https://ipa.win.tue.nl/archive/springdays2005/Deursen1.pdf)
 
-- Classical, principled way
+- Principled way
 - View-driven approach
 - Distinguishes between three kinds of *views*
     1. **Source**
@@ -159,15 +160,13 @@ Reverse engineering = analyzing a system to identify its components, their inter
 ![](images/symphony.png)
 
 
-
-*2 min in pairs: think of a system you know — what would be the "problem elicitation" and "concept determination" for recovering its architecture?*
-
 ### Problem elicitation establishes the business case
 - What is the problem?
 
 ![](images/symphony.png)
 
 
+*2 min in pairs: think of a system you know — what would be the "problem elicitation" and "concept determination" for recovering its architecture?*
 
 ### Concept determination identifies needed viewpoints
 
@@ -175,8 +174,6 @@ Reverse engineering = analyzing a system to identify its components, their inter
 - **Which viewpoints are relevant?**
 
 ![](images/symphony.png)
-
-
 
 
 ### Data gathering extracts low-level source views
