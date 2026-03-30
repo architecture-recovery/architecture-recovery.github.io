@@ -80,7 +80,7 @@ Developers make decisions and changes:
 | Nature                            | Unconscious divergence     | Violation of known constraints |
 | Analogy                           | Getting lost without a map | Having a map and ignoring it   |
 
-### Historical Examples of Architectural Drift
+### Many Well-Known Systems Drifted into What They Are Today
 - **Linux kernel** — **started monolithic**, gradually absorbed loadable modules, drifting toward a **hybrid kernel** through thousands of pragmatic decisions
 - **WordPress** — began as a blogging engine, drifted into a **general-purpose CMS and e-commerce platform** via plugins and custom post types
 - **Eclipse** — **started as a Java** IDE, drifted into a "**platform for anything**" because the plugin architecture was too flexible to constrain
