@@ -20,7 +20,10 @@ An up-to-date architectural diagram.
 ![](images/twitter_arch_recovered.png)
 [link to original tweet](https://twitter.com/elonmusk/status/1593899029531803649)
 
-Note: this diagram was *recovered by an outsider*, not produced by the company. Is it still accurate today?
+Note: this diagram was *recovered by an outsider*, not produced by the company. 
+
+Is it still accurate today?
+Is it sufficient? 
 
 
 ## Many Situations Require Understanding a System's Architecture
@@ -33,6 +36,8 @@ Note: this diagram was *recovered by an outsider*, not produced by the company. 
 
 ## Architectural Documentation Is Rarely Available or Up to Date
 
+### Group Discussion: Have you encountered up-to-date architectural documentation? 
+
 *2 min in pairs, then we collect answers*
 
 ### No
@@ -44,8 +49,10 @@ Note: this diagram was *recovered by an outsider*, not produced by the company. 
 
 ## Few Incentives and Inherent Difficulty Explain the Gap
 
-### Few stakeholders prioritize architecture documentation
+### Rarely do stakeholders prioritize architecture documentation
+
 - You're a startup that needs to show that the idea is viable — no time for documentation
+- You're a customer that does not know about software - you want the features, the functional requirements - not the NFRs
 - Often there is no perceived value for the customer (or more likely, no clear immediate value)
 
 ### Creating and maintaining it is hard
@@ -62,20 +69,35 @@ Developers make decisions and changes:
 
 (Both terms from Perry & Wolf, [Foundations for the Study of Software Architecture](https://dl.acm.org/doi/10.1145/141874.141884), 1992)
 
-### Erosion Example
+|                                   | Drift                      | Erosion                        |
+| --------------------------------- | -------------------------- | ------------------------------ |
+| Requires documented architecture? | No                         | Yes                            |
+| Nature                            | Unconscious divergence     | Violation of known constraints |
+| Analogy                           | Getting lost without a map | Having a map and ignoring it   |
+
+### Historical Examples of Architectural Drift
+- **Linux kernel** — **started monolithic**, gradually absorbed loadable modules, drifting toward a **hybrid kernel** through thousands of pragmatic decisions
+- **WordPress** — began as a blogging engine, drifted into a **general-purpose CMS and e-commerce platform** via plugins and custom post types
+- **Eclipse** — **started as a Java** IDE, drifted into a "**platform for anything**" because the plugin architecture was too flexible to constrain
+
+### Architectural Erosion Example
+
+The architecture prescribes communication via the EventBus, but ClassB bypasses it with a direct call to ClassA.
+
 ![](images/adjacent_connector_.png)
 
-*2 min in pairs:*
-- What could be the cause of erosion here?
-- Why would it be a problem?
+*2 min in pairs: If an AI agent were adding a feature to ComponentB, would it be more likely to use the EventBus or make a direct call? Why?*
 
+### AI Agents Amplify Drift and Erosion
+- An AI coding agent will continue in whatever direction the codebase is already heading
+- It optimizes locally — it won't stop to ask whether the accumulation of decisions still serves a coherent whole
+- This makes prescriptive architecture and architectural awareness even more important than before
 
+## Three Responses to Architectural Decay
 
-## Three Approaches to Keeping Architecture Current
+### Preventive: Enforce constraints so code must match architecture
 
-### Enforce constraints so code must match architecture
-
-Specify the architecture, draw it, and then ensure that all new code conforms to it!
+Specify the architecture (draw it, formalize it), and then ensure that all new code conforms to it!
 
 - Type systems — too low-level
 - Special tools for defining architecture constraints
@@ -85,17 +107,17 @@ Specify the architecture, draw it, and then ensure that all new code conforms to
 		- CI/CD
 		- Pre-commit hooks
 		- IDE
-### Generate diagrams that evolve with the code
+### Continuous: Generate diagrams that evolve with the code
 
 - Declarative architecture: docker compose, infrastructure-as-code — the architecture *is* the code
 - A research direction that we work on here at ITU
 - Not the focus of this course
 - This course will however, give you the tools for implementing your own evolving diagrams
 
-### Recover the architecture directly from code
+### Reactive: Recover the architecture directly from code
 - As opposed to *drawing them in Powerpoint*
 - No great tools for this — often too much low-level noise
-- **The focus of this course**
+- **The focus of this course** (and the thesis of Babette and Lotte :)
 
 
 
@@ -185,12 +207,12 @@ Example: [Google Collab with Basic Data Gathering](https://colab.research.google
 
 ## Course Roadmap
 
-| Week | Topic |
-|------|-------|
-| 1 | **Introduction** — what, why, and how (today) |
-| 2 | **Abstraction & Visualization** — from raw data to architectural views |
-| 3 | **Evolutionary Analysis** — what version control reveals |
-| 4 | **Dynamic Analysis** — observing the running system |
+| Week | Topic                                                                  |
+| ---- | ---------------------------------------------------------------------- |
+| 1    | **Introduction** — what, why, and how (today)                          |
+| 2    | **Abstraction & Visualization** — from raw data to architectural views |
+| 3    | **Evolutionary Analysis** — what version control reveals               |
+| 4    | **Dynamic Analysis** — observing the running system                    |
 
 
 
