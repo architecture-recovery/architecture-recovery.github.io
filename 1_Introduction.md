@@ -6,6 +6,11 @@ IT University of Copenhagen
 
 Mircea Lungu
 
+## Intro
+- *whoami*
+- *whoareyou*
+
+
 ## Riddle
 
 ### What is the software artifact that you are not guaranteed to have, not even when paying 50B for a software company?
@@ -196,57 +201,100 @@ Defined by Ducasse & Pollet, [Software Architecture Reconstruction: a Process-Or
 ![](images/symphony.png)
 
 
-## Source Views Are Not Necessarily Architectural
+## Source Views Are Not Architectural
 
 Example: [Google Collab with Basic Data Gathering](https://colab.research.google.com/drive/1oe_TV7936Zmmzbbgq8rzqFpxYPX7SQHP#scrollTo=0ruTtX88Tb-w)
 
 
+*2 min in pairs: What are the limitations of the regex-based import extraction in the Collab? What dependencies could it miss?*
 
-## Course Roadmap
+## More Advanced Source Code Analysis
+
+The regex approach in the Collab is a starting point, not a complete solution — it will miss aliased imports, conditional imports, re-exports, etc.
+
+
+
+### Even AST-based import analysis won't catch all dependencies
+
+#### Transitive dependencies through method calls
+You import `Bar`, but then call `Bar().baz()` which returns a `Baz` object. Your code now depends on `Baz`'s interface — if `Baz` changes, your code breaks — but your imports only mention `Bar`.
+```python
+from bar_module import Bar
+result = Bar().baz()    # returns a Baz object
+result.do_something()   # depends on Baz's interface — but we never imported it
+```
+
+#### HTTP coupling between services
+In Zeeguu, the API server calls `stanza_service` for tokenization. There's no `import stanza_service` — it's an HTTP request to a URL. But if `stanza_service` goes down, the API breaks.
+
+#### Database-mediated coupling
+Service A writes to a `jobs` table, Service B polls it. Neither imports the other, but they're tightly coupled through the shared table schema.
+
+#### Reflection and dynamic dispatch
+```python
+handler = getattr(module, f"handle_{event_type}")
+handler(data)
+```
+This calls a function based on a runtime string. No static analysis will find that dependency.
+
+
+
+
+## (Intermezzo) Measuring System Size with `cloc`
+
+on mac: `brew install cloc`
+
+
+`cloc` (Count Lines of Code) is a useful first step in understanding a system. But raw output needs iterative refinement — a mini data gathering process in itself.
+
+**Step 1** — Run naively:
+```bash
+cloc .
+```
+Result includes venv, caches, everything — thousands of files, meaningless numbers.
+
+**Step 2** — Exclude obvious non-project code:
+```bash
+cloc --exclude-dir=venv,site-packages,__pycache__ .
+```
+Result: 886 files, 380k lines — but 298k of those are "Text" files, not code.
+
+**Step 3** — Focus on the language you care about:
+```bash
+cloc --include-lang=Python --exclude-dir=venv,site-packages,__pycache__ .
+```
+Result: 560 files, ~48k lines — a much more meaningful picture.
+
+**Step 4** — Depending on your analysis, consider excluding tests, migrations, or legacy code:
+```bash
+cloc --include-lang=Python --exclude-dir=venv,site-packages,__pycache__,test,old,migrations .
+```
+
+Each step is a judgment call about what counts as "the system." This is already architecture recovery thinking: deciding what's signal and what's noise.
+
+
+
+
+
+# Course Roadmap
+
+## Topics
 
 | Week | Topic                                                                  |
 | ---- | ---------------------------------------------------------------------- |
 | 1    | **Introduction** — what, why, and how (today)                          |
 | 2    | **Abstraction & Visualization** — from raw data to architectural views |
-| 3    | **Evolutionary Analysis** — what version control reveals               |
-| 4    | **Dynamic Analysis** — observing the running system                    |
+| 3    | **Dynamic Analysis** — observing the running system                    |
+| 4    | **Evolutionary Analysis** — what version control reveals               |
 
 
+## Individual Assignment
 
 
-# Individual Assignment
+### Recover the architecture of an existing system
+- Generate architectural views (e.g., module view, deployment view) from code
 
-
-## Goal
-
-- **Recover the architecture of an existing system**
-
-- Document the outcome in an **individual report**
-	- the target reader is a developer who needs to take over the system and maintain it
-	- brief (not more than 3–5 pages)
-	- do not explain what Symphony does in the report; assume the reader knows it
-	- focus on your results
-
-
-
-
-## Case-Study Systems
-
-1. The Zeeguu Project
-	- [zeeguu.org](https://zeeguu.com) (invite code: zeeguu-preview)
-	- Code:
-		- Python Backend: [Zeeguu-API](https://github.com/zeeguu/API)
-		- React Frontend: [Zeeguu-Web](https://github.com/zeeguu/web)
-	- A [paper](https://github.com/zeeguu-ecosystem/CHI18-Paper/blob/master/!AsWeMayStudy--Preprint.pdf) about the system
-
-or,
-
-2. Another system that you know
-	- if it has comparable complexity (>200 files)
-	- you confirm with me about the appropriateness of the system
-
-
-## Viewpoints
+#### Viewpoints
 
 1. Module Viewpoint (**default**)
 	- we will write example code snippets in Collab to support this
@@ -255,6 +303,33 @@ or,
 2. Other Viewpoints
 	- you could look at the execution or deployment information
 	- might make more sense for another system — the Zeeguu one is too simple (could be done together with the module)
+
+#### Case-Study System
+
+1. **A system that you know** (preferred)
+	- Comparable complexity (>10k lines of code; use `cloc` to check)
+	- To confirm appropriateness: post your `cloc` output and initial import graph on `#arch-recovery-source-views`
+
+2. The Zeeguu Project (fallback — if you don't have a system of your own)
+	- [zeeguu.org](https://zeeguu.com) (invite code: zeeguu-preview)
+	- Code:
+		- Python Backend: [Zeeguu-API](https://github.com/zeeguu/API)
+		- React Frontend: [Zeeguu-Web](https://github.com/zeeguu/web)
+	- A [paper](https://github.com/zeeguu-ecosystem/CHI18-Paper/blob/master/!AsWeMayStudy--Preprint.pdf) about the system
+
+### Alternative Goal B: Detect dead code in an existing system
+- Identify code that is no longer called in production
+- Requires combining static analysis (what *could* be called) with dynamic analysis (what *is* called) 
+- Don't just produce a list — abstract the results (e.g., which modules are most affected? are there patterns in what became dead?)
+- For Zeeguu: production endpoint data is available from FMD
+- For other systems: you need access to production usage data — confirm feasibility with me
+
+Both options:
+- Document the outcome in an **individual report**
+	- the target reader is a developer who needs to take over the system and maintain it
+	- brief (not more than 3–5 pages)
+	- do not explain what Symphony does in the report; assume the reader knows it
+	- focus on your results
 
 ## Tools
 
@@ -268,29 +343,19 @@ or,
 	- the time programmers spend coding, you'll spend finding and comparing third-party tools
 
 
-
-
-# For Next Week
-
-
-## Reading
-- [Symphony: View-Driven Software Architecture Reconstruction](https://ipa.win.tue.nl/archive/springdays2005/Deursen1.pdf)
-	- (note: Symphony uses "reconstruction" — same thing as "recovery")
-
+# For Next Meeting
 
 ## Individual Project
-- Start looking for a case study that you would like to analyze
+- Choose a case study that you want to analyze
+- Understand the code in [Google Collab with Basic Data Gathering](https://colab.research.google.com/drive/1oe_TV7936Zmmzbbgq8rzqFpxYPX7SQHP#scrollTo=0ruTtX88Tb-w)
+- Create your own GH repo for your own analysis tool - unless you don't know how, then you can clone the Collab and work in it
+- Apply your analysis on your proposed system and post your source view together with the system size: #arch-recovery-source-views on Discord
+- (Optional) Complete the implementation of the import extractor with a more precise approach than regex
+	- - **If you can program**: use a real AST parser (e.g., Python's `ast` module, JavaScript's `@babel/parser`) for your project — the results will be far more reliable - it's fine to still only at imports; but at least that should be done as well as possible
+	- If you're from KSD/business: regex is fine, but be aware of its limitations and document them
 
 
-## Practice
-- [Google Collab with Basic Data Gathering](https://colab.research.google.com/drive/1oe_TV7936Zmmzbbgq8rzqFpxYPX7SQHP#scrollTo=0ruTtX88Tb-w)
-	- Understand the code
-	- Apply it on your own case study if you already have one
-	- Can you complete the implementation of the import extractor with the missing part?
-		- (consider using an AST parser to extract more precise dependencies)
-		- what if an import is not at the beginning of the line?
 
-
-## Questions & Feedback
+# Questions & Feedback
 - Use the anonymous [form](https://forms.gle/ADWfDZdKfPwdFG1D6)
 - Or on Discord if it's of general interest
