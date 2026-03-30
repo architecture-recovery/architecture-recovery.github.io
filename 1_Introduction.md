@@ -208,7 +208,7 @@ Example: [Google Collab with Basic Data Gathering](https://colab.research.google
 
 *2 min in pairs: What are the limitations of the regex-based import extraction in the Collab? What dependencies could it miss?*
 
-## More Advanced Source Code Analysis
+## Import Analysis Misses Many Real Dependencies
 
 The regex approach in the Collab is a starting point, not a complete solution — it will miss aliased imports, conditional imports, re-exports, etc.
 
@@ -240,7 +240,7 @@ This calls a function based on a runtime string. No static analysis will find th
 
 
 
-## (Intermezzo) Measuring System Size with `cloc`
+## Measuring System Size Requires Iterative Refinement
 
 on mac: `brew install cloc`
 
