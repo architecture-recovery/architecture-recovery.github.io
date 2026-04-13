@@ -88,18 +88,18 @@ Interactive: [Basic Abstraction: Filtering out non-system dependencies](https://
 
 ### 2. Using more advanced graph layouts
 
-Graph layout drawing is a [has a rich and old history](https://en.wikipedia.org/wiki/Force-directed_graph_drawing#History). 
+Graph layout drawing [has a rich and old history](https://en.wikipedia.org/wiki/Force-directed_graph_drawing#History). 
 
 Interactive: [Basic Abstraction: Alternative layouts with networkx](https://networkx.org/documentation/stable/reference/drawing.html) 
 
-**Lesson**: *Advanced graph layouts can  be useful when looking at graphs but their benefits are limited; a layout can do much with a graph that is too dense and too large*. 
+**Lesson**: *Advanced graph layouts can be useful when looking at graphs but their benefits are limited; a layout can't do much with a graph that is too dense and too large*. 
 
 
 ### Limitations of simplification
 
-The above two methods can help but a little bit. 
+The above two methods help a little bit. 
 
-It will be even less so in more complex systems. 
+They will help even less in more complex systems. 
 
 The solution is *abstraction*. 
 
@@ -123,7 +123,7 @@ But how can we abstract this low-level source view that we have obtained?
 
 ### Motivational Case Study: Reflexion Models
 
-This approach uses *"[...] domain knowledge is used to **define a map between the source and target view**."* 
+In this approach *"[...] domain knowledge is used to **define a map between the source and target view**."* 
 
 > This activity may require either interviewing the system experts in order to formalize architecturally-relevant aspects not available in the implementation or to iteratively augment the source view by adding new concepts to the source viewpoint
 >
@@ -176,9 +176,6 @@ Reflection model = (an ***architectural viewpoint*** that) indicates **where the
 1. Convergences
 2. Divergences
 3. Absences
-
-
-
 
 
 Hierarchies are powerful. We organize societies in them. And we organize software systems in them. 
@@ -246,7 +243,7 @@ Pros:
 2. Can be used in a MSc thesis :) (e.g. [topic1](https://github.com/mircealungu/student-projects/issues/4), [topic2](https://github.com/mircealungu/student-projects/issues/35)) 
 
 Cons:
-- Some languages don't use the folder structure the same way: C# has folders vary independent from namespaces. 
+- Some languages don't use the folder structure the same way: C# has folders very independent from namespaces. 
 - COBOL does not have a folder structure at all. Smalltalk does not even have files. 
 
 ## Approach #2: Abstracting Module Properties Using Metrics 
@@ -267,7 +264,7 @@ Metrics can express these *"properties"*.
 
 A few metrics can be computed directly on a given module: 
 - number of contained files
-- number of commits that involve 
+- number of commits that touch the module
 
 
 ### Metrics that can also be aggregated from lower-level components to modules
@@ -294,27 +291,24 @@ For **Dependencies**
 - **Number of distinct** explicit low-level dependencies 
 
 The way to use metrics:
-- GCM = goal - question - metric approach. 
+- GQM = goal - question - metric approach. 
 
 
 
 ### Softwarenaut Combines Top-Down Exploration with Metrics
 
-One approach would be an interactive top-down exploration approach combined with metrics is  Softwarenaut ([video](https://vimeo.com/62767181)) described in [Evolutionary and Collaborative Software Architecture Recovery with Softwarenaut,](https://core.ac.uk/download/pdf/33045731.pdf) by Lungu et al.
+An interactive top-down exploration approach combined with metrics is Softwarenaut ([video](https://vimeo.com/62767181)) described in [Evolutionary and Collaborative Software Architecture Recovery with Softwarenaut,](https://core.ac.uk/download/pdf/33045731.pdf) by Lungu et al.
 
 ![500](./images/polymetric_view_of_argouml.png)
-Figure: Augmeting nodes and dependencies with metrics in ArgoUML packages.
+Figure: Augmenting nodes and dependencies with metrics in ArgoUML packages.
 
 Note: you can not know upfront to what level to aggregate. So it is good to be able to explore various levels. 
 
 
 
-
-
-
 ## Approach #3: Network Analysis Can Identify the Most Important Elements
 
-This approach aims to abstract the system by extracting the most important elements in it. And the importance of the elements is given yn their graph-theoretical properties. 
+This approach aims to abstract the system by extracting the most important elements in it. And the importance of the elements is given by their graph-theoretical properties. 
 
 The `PageRank` algorithm that made Google famous tries to gauge the importance of a page in a network of pages based on the references pages make to each other. 
 
@@ -391,7 +385,7 @@ Source: *The Visual Display of Quantitative Information*, E. Tufte
 Introduces: **The Five Laws of Data-Ink ([Example](https://www.codeconquest.com/blog/data-ink-ratio-explained-with-example/))**
 
 1. Above all else, show the data
-2. [Maximize Data-Ink Ratio]([Maximize Data-Ink ratio at infovis-wiki](https://infovis-wiki.net/wiki/Data-Ink_Ratio) )
+2. [Maximize Data-Ink Ratio](https://infovis-wiki.net/wiki/Data-Ink_Ratio)
 3. Erase non-data ink
 4. Erase redundant data ink
 5. Revise and edit
@@ -413,7 +407,7 @@ Approaches touched today:
 
 ![600](images/uml_diagram_of_poker_game.png)
 
-Image: Pocker Game
+Image: Poker Game
 - 25 Classes
 
 
@@ -512,9 +506,13 @@ Today we went from raw data to architectural views — that was reverse engineer
 
 ### Reading for next time
 
-Today we saw that abstraction requires human judgment — reflexion models need domain experts, folder aggregation needs someone to choose the right level. But how do you *get* that initial understanding of a system?
+Today we saw that abstraction requires human judgment:
+- reflexion models need domain experts, 
+- folder aggregation needs someone to choose the right level
 
-Read **Chapter 3: "First Contact"** from Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf) (free online). It formalizes the first steps as reusable patterns: "Chat with the Maintainers", "Read All the Code in One Hour", "Skim the Documentation", "Interview During Demo", "Study the Exceptional Entities", etc. Apply these to your project system this week.
+But how do you *get* that initial understanding of a system?
+
+Read **Chapter 3: "First Contact"** from Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf) (free online). It formalizes the first steps as reusable patterns: "Chat with the Maintainers", "Read All the Code in One Hour", "Skim the Documentation", "Interview During Demo", "Study the Exceptional Entities", etc. Apply those patterns that fit your case this week.
 
 ### In your projects
 
