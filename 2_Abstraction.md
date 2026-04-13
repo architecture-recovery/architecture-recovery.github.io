@@ -1,6 +1,23 @@
 ## Recap: ASTs for Dependency Extraction
 
-Last time we extracted imports with regex. That works, but it's fragile — it can't tell if an import is inside a comment, a string, or a conditional block. The more robust approach is to use an **Abstract Syntax Tree** (AST).
+### Last time we extracted imports with regex. That works, but it's fragile. 
+
+Consider this code:
+
+```python
+# import os            <-- commented out, not a real import
+
+error_msg = """
+import sys             <-- inside a string, not a real import
+"""
+
+def connect():
+    import sqlite3     <-- real import, but indented (regex with ^ won't match)
+```
+
+A regex like `^import (\S+)` would miss the conditional import and wrongly match the commented-out or string-embedded ones. An AST parser handles all of these correctly — it only sees actual code.
+
+### AST-based extraction gets it right
 
 Using the same `user.py` file from last week's Colab:
 
@@ -37,7 +54,7 @@ Three things to remember:
 This is what you should use in your projects if you're working in Python. Other languages have equivalent libraries (e.g., `@babel/parser` for JavaScript, `tree-sitter` for multi-language support).
 
 
-# The Source View from Last Lecture Is Not Yet Architectural
+# The Source View from Last Lecture Is Not Architectural
 
 It reflects reality,
 it conveys the message that software is complex, 
@@ -307,9 +324,9 @@ Visual intuition about PageRank ranking (Image source: [spatial-lang.org](https:
 In the paper [Ranking software artifacts](http://scg.unibe.ch/archive/papers/Peri10bRankingSoftware.pdf) Perin et al. applied the PR algorithm in order to attempt to detect the most relevant elements in a software system.
 
 *Note:* Consider trying it out in your project if you're interested in network analysis! It should not be that hard, the `networkx` package supports various methods of network analysis, e.g. [centrality](https://networkx.org/documentation/stable/reference/algorithms/centrality.html#degree), [HITS](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.hits_alg.hits.html), [pagerank](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.pagerank_alg.pagerank.html).
+I haven't done this myself, but I believe that it can be super interesting. 
 
-
-## Approach #4: Automatic Clustering Still Needs Human Interpretation
+## Approach #4: Automatic Clustering Attempts to Discover Structure Without Domain Knowledge
 
 What if we did unsupervised learning? We could do hierarchical clustering of the system for example. Then, we could hope that the clusters are mapped on architectural components. 
 
@@ -331,9 +348,13 @@ Case study: Hierarchical Clustering. [Interactive Exploration of Semantic Cluste
 
 We've now seen several ways to abstract a system. But abstraction alone isn't enough — the result needs to be *presented* effectively.
 
+## Lessons from Information Visualization
+
 ### Information Visualization Can Highlight the Essence of Events
 
-[**Charles Minard**](http://t.umblr.com/redirect?z=http%3A%2F%2Fwww.edwardtufte.com%2Ftufte%2Fminard-obit&t=OTE3ZmE1M2ZiMTBiYWYwZDgwN2VlN2ZmMzhjYTI3N2JkOWM2MGY2Nyx3YWNGM3RHZQ%3D%3D)'s 1869 graph of Napoleon's 1812 march on Moscow shows the dwindling size of the army. **Tufte says that it is probably the best statistical graphic ever drawn.**
+[**Charles Minard**](http://t.umblr.com/redirect?z=http%3A%2F%2Fwww.edwardtufte.com%2Ftufte%2Fminard-obit&t=OTE3ZmE1M2ZiMTBiYWYwZDgwN2VlN2ZmMzhjYTI3N2JkOWM2MGY2Nyx3YWNGM3RHZQ%3D%3D)'s 1869 graph of Napoleon's 1812 march on Moscow shows the dwindling size of the army. 
+
+Edward Tufte says that this is **probably the best statistical graphic ever drawn.**
 
 The broad line on top represents the army's size on the march from Poland to Moscow. The thin dark line below represents the army's size on the retreat. The width of the lines represents the army size, which started over 400,000 strong and dwindled to 10,000. The bottom lines are temperature and time scales, and the overall plot shows distance travelled.
 
@@ -346,7 +367,7 @@ A nice modern, [rerendering](https://graphworkflow.com/2019/06/25/minard/)
 
 ---
 
-### Information Visualization Can Save Lives
+### Information Visualization Can Reveal Problems Hidden in the Data
 
 In a now legendary experiment in 1854, Dr. John Snow, a London physician, conducted a simple yet brilliant test that helped to settle the debate about the transmission of cholera. Snow drew a map [see Figure 2 below] of a virulent cholera outbreak in one of the poorest neighborhoods of London – served by central wells and no sewage collection. He plotted the homes and numbers of people affected, and in a flash of insight, mapped the location of the wells that provided water for the hardest hit neighborhoods. The maps he generated and the interviews he conducted with the families of victims convinced him that the source of contamination was the water from the Broad Street well. **He received permission from local authorities to remove the pump, which forced residents to go to other, uncontaminated wells for water. Within days, the outbreak subsided**."
 
@@ -412,7 +433,7 @@ Image: Java Link API
 - Not used much for documentation(ArgoUML had no class diagrams about itself)
 
 
-## Polymetric Views
+## Polymetric Views Go Beyond UML
 
 
 ### A Polymetric View Maps Multiple Metrics onto System Structure
@@ -488,6 +509,12 @@ Today we went from raw data to architectural views — that was reverse engineer
 - Could LLMs help with architecture recovery? Where in the Symphony process would they fit?
 
 - What is the difference between a recovered view and a hand-drawn diagram on a whiteboard? Which do you trust more, and why?
+
+### Reading for next time
+
+Today we saw that abstraction requires human judgment — reflexion models need domain experts, folder aggregation needs someone to choose the right level. But how do you *get* that initial understanding of a system?
+
+Read **Chapter 3: "First Contact"** from Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf) (free online). It formalizes the first steps as reusable patterns: "Chat with the Maintainers", "Read All the Code in One Hour", "Skim the Documentation", "Interview During Demo", "Study the Exceptional Entities", etc. Apply these to your project system this week.
 
 ### In your projects
 
