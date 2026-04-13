@@ -344,7 +344,7 @@ Case study: Hierarchical Clustering. [Interactive Exploration of Semantic Cluste
 
 
 
-# Abstraction Alone Isn't Enough — Results Must Be Presented Effectively
+# Visualization Bridges Abstraction and Understanding
 
 We've now seen several ways to abstract a system. But abstraction alone isn't enough — the result needs to be *presented* effectively.
 
