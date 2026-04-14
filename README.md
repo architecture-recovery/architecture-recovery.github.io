@@ -2,7 +2,7 @@
 
 ## Lectures
 
-Lecture notes for Mircea's three week arc in the Advanced Software Engineering course at ITU.
+Lecture notes for Mircea's four week arc in the Software Architecture course at ITU.
 
 1. [Introduction](1_Introduction.md)
 2. [Abstraction & Visualization](2_Abstraction.md)
