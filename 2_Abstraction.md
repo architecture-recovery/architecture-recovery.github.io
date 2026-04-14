@@ -215,12 +215,16 @@ One tool that does this is Archlens.
 ```json
     "views": {
     
+    
         "topLevel": {
              "packages": [
                 {"packagePath":"", "depth":0}
             ],
             "ignorePackages": []
         },
+        
+        
+        
         
 	     "api-core-details": {
 	        "packages": [
@@ -256,13 +260,15 @@ Types of metrics:
 1. **Product** - measure the resulting product, e.g. source code: LOC, NOM, CYCLO of a method
 2. **Process** - measure the process, e.g. frequency of change
 
+Cyclomatic Complexity - the number of independent paths through the code. 
+
 *So how is this a complementary tool?* 
 
 Remember the def of architecture: **"[...] modules, their properties, and the relationships between them"**.
 
 Metrics can express these *"properties"*.
 
-A few metrics can be computed directly on a given module: 
+A few metrics can be computed **directly** on a given module: 
 - number of contained files
 - number of commits that touch the module
 
@@ -318,7 +324,8 @@ Visual intuition about PageRank ranking (Image source: [spatial-lang.org](https:
 In the paper [Ranking software artifacts](http://scg.unibe.ch/archive/papers/Peri10bRankingSoftware.pdf) Perin et al. applied the PR algorithm in order to attempt to detect the most relevant elements in a software system.
 
 *Note:* Consider trying it out in your project if you're interested in network analysis! It should not be that hard, the `networkx` package supports various methods of network analysis, e.g. [centrality](https://networkx.org/documentation/stable/reference/algorithms/centrality.html#degree), [HITS](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.hits_alg.hits.html), [pagerank](https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.link_analysis.pagerank_alg.pagerank.html).
-I haven't done this myself, but I believe that it can be super interesting. 
+
+Note 2: I haven't done this myself, but I believe that it can be super interesting. 
 
 ## Approach #4: Automatic Clustering Attempts to Discover Structure Without Domain Knowledge
 
@@ -484,6 +491,17 @@ Architecture recovery could be a possible first step in reengineering.
 
 Today we went from raw data to architectural views — that was reverse engineering. If we then *change* the system based on what we learn, that's reengineering.
 
+### Reading for next time
+
+Today we saw that abstraction requires human judgment:
+- reflexion models need domain experts, 
+- folder aggregation needs someone to choose the right level
+
+But how do you *get* that initial understanding of a system?
+
+Read **Chapter 3: "First Contact"** from Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf) (free online). It formalizes the first steps as reusable patterns: "Chat with the Maintainers", "Read All the Code in One Hour", "Skim the Documentation", "Interview During Demo", "Study the Exceptional Entities", etc. Apply those patterns that fit your case this week.
+
+
 
 # Conclusion
 ### What you should be able to discuss
@@ -504,19 +522,11 @@ Today we went from raw data to architectural views — that was reverse engineer
 
 - What is the difference between a recovered view and a hand-drawn diagram on a whiteboard? Which do you trust more, and why?
 
-### Reading for next time
 
-Today we saw that abstraction requires human judgment:
-- reflexion models need domain experts, 
-- folder aggregation needs someone to choose the right level
-
-But how do you *get* that initial understanding of a system?
-
-Read **Chapter 3: "First Contact"** from Demeyer et al., [Object Oriented Reengineering Patterns](http://scg.unibe.ch/download/oorp/OORP.pdf) (free online). It formalizes the first steps as reusable patterns: "Chat with the Maintainers", "Read All the Code in One Hour", "Skim the Documentation", "Interview During Demo", "Study the Exceptional Entities", etc. Apply those patterns that fit your case this week.
 
 ### In your projects
 
-- **By next Monday**: reply to your own source view post in `#arch-recovery-source-views` on Discord with your abstracted view. This way we can see the before and after side by side.
+- **By next Monday**: reply to your own abstracted view post in `#arch-recovery-source-views` on Discord with your abstracted view. This way we can see the before and after side by side.
 
 - Start from the dependencies extracted last time and create an abstracted module view based on aggregating entities and relationships
 
