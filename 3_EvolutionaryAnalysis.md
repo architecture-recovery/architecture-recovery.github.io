@@ -8,11 +8,7 @@ Mircea Lungu (mlun@itu.dk)
 
 > -- Heraclitus
 
-
-As opposed to life, in software we record the changes. Can we use them for Architecture Recovery? Can we use them for architecture evolution? 
-The answer is in todays' lecture. 
-
-
+*As opposed to life, in software we record the changes. Can we use them for Architecture Recovery? Can we use them for architecture evolution?* 
 
 
 # Software Evolution: The System Is Never Finished
