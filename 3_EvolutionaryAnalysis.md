@@ -168,7 +168,15 @@ This matters because volatility concentrates bugs, complexity, and future effort
 - It's likely that they'll require more effort in the future (e.g. yesterday's weather [Girba et al.])
 - Are likely to be most important parts of the code if there is the most work done on them
 
-#### Caveats when using churn
+### Abstract: evolutionary hotspots as an architectural viewpoint
+
+Aggregating churn along the module hierarchy gives us an **evolutionary hotspots** view — an architectural viewpoint that highlights the code entities (modules, packages, subsystems) with the highest cumulative churn.
+
+This is the same extract → abstract move we saw in Week 2: raw per-file measurements rolled up along the module hierarchy to produce something architecturally meaningful.
+
+Notebook: [Abstracting Churn Along the Module Hierarchy in Python](https://colab.research.google.com/drive/1T4Hj12uD6h5Ody4ietooe5nW-yGFCoX9?usp=sharing)
+
+### Caveats when using churn
 
 **Input — what goes into the churn calculation**
 
@@ -181,14 +189,6 @@ This matters because volatility concentrates bugs, complexity, and future effort
 
 3. **Developer styles vary** — the micro-commits developer vs. the large-chunk committer. You could use LOC changed instead of commit count. (*What could the problems with this be?*)
 4. **Time interval matters.** Weight recent changes more heavily — a module that churned wildly three years ago but is stable now is not a current hotspot.
-
-### Abstract: evolutionary hotspots as an architectural viewpoint
-
-Aggregating churn along the module hierarchy gives us an **evolutionary hotspots** view — an architectural viewpoint that highlights the code entities (modules, packages, subsystems) with the highest cumulative churn.
-
-This is the same extract → abstract move we saw in Week 2: raw per-file measurements rolled up along the module hierarchy to produce something architecturally meaningful.
-
-Notebook: [Abstracting Churn Along the Module Hierarchy in Python](https://colab.research.google.com/drive/1T4Hj12uD6h5Ody4ietooe5nW-yGFCoX9?usp=sharing)
 
 # Embracing evolution: making architectural change visible in every PR
 
@@ -210,6 +210,7 @@ Traditional architecture documentation loses the race. By the time a diagram get
 
 - You define module views in a lightweight specification file
 - You can get Interactive Architectural Views in your IDE (courtesy of Casper and Sebastian BSc Thesis!)
+![](images/archlens-interactive.png)
 - You get support for .Net and Java and a few other languages (courtesy of Babette and Lotte's MSc Thesis!)
 - A GitHub Action generates an architectural diff for every PR and posts it as a comment 
 
@@ -217,9 +218,36 @@ Traditional architecture documentation loses the race. By the time a diagram get
 
 Example from [PR #517 to zeeguu/api](https://github.com/zeeguu/api/pull/517#issuecomment-4188532557)
 
-
-
 **The broader goal**: make the architecture view a **first-class artifact** in the development loop, not a stale document that occasionally gets refreshed.
+
+## Architectural Decision Records
+
+Structured records of every decision that is architectural in an explicit file with a clear [template](https://github.com/zeeguu/api/blob/master/docs/adr/template.md) problem-solution-discussion structure
+### **Context**
+**What is the issue that we're seeing that is motivating this decision or change?**
+
+- What problem are we trying to solve?
+- What constraints are we working within?
+- What alternatives did we consider?
+### Decision
+**What is the change that we're actually proposing or implementing?**
+
+### Consequences
+**What becomes easier or more difficult to do because of this change?**
+#### Positive
+What benefits do we get?
+What problems does this solve?
+#### Negative
+What are the trade-offs?
+What complexity are we adding?
+What new dependencies do we have?
+#### Neutral
+What other impacts should we be aware of?
+
+
+
+
+
 
 
 
@@ -229,9 +257,9 @@ Example from [PR #517 to zeeguu/api](https://github.com/zeeguu/api/pull/517#issu
 
 - **Socio-technical angle.** The same VCS data can reveal *who* knows what about the system, not just *where* change concentrates. See [Code Ownership and Truck Factor](code_ownership.md) for Git-Truck and the Avelino paper — related but outside today's architecture-recovery focus.
 
-- What if you could replay the history of a system from the beginning but only showing those files that made it to the end. So project the beginnings through the perspective of the endings. Would that be a useful way of focusing on the most relevant aspects of the system? 
+- What happens if you **combine static analysis, evolutionary analysis, and LLMs?** A project that only uses LLMs is [gitdiagram](https://github.com/ahmedkhaleel2004/gitdiagram) - this could be a thesis project actually!
 
-- What happens if you combine your static analysis, and abstraction with LLMs - a project that only uses LLMs is [gitdiagram](https://github.com/ahmedkhaleel2004/gitdiagram) - this could be a thesis project actually!
+- For those of you who are good at visualization, can we improve the visu
 
 # For Your Projects
 
