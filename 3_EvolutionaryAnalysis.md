@@ -190,23 +190,46 @@ Traditional architecture documentation loses the race. By the time a diagram get
 
 ## The Idea: Architectural Diff at Review Time
 
-What if architectural change were surfaced at the same moment as the code change — in the pull request itself? Then reviewers can reason about architectural impact *alongside* the code diff, not after the fact. Deliberate evolution becomes the default. Accidental drift becomes visible the moment it's introduced.
+### What if architectural change were surfaced at the same moment as the code change — in the pull request itself? 
+
+- Reviewers can reason about architectural impact *alongside* the code diff, not after the fact. 
+- Deliberate evolution becomes the default. 
+- Accidental drift becomes visible the moment it's introduced.
+
+## ArchLens as One Possible Operationalization of the Idea
+
+[ArchLens](https://github.com/archlens/ArchLens) — a tool we've been developing here at ITU — implements this approach. 
+
+- You define module views in a lightweight specification file
+- You can get Interactive Architectural Views in your IDE (courtesy of Casper and Sebastian)
+- A GitHub Action generates an architectural diff for every PR and posts it as a comment
+- Over time, the PR history becomes an annotated record of how the architecture evolved — and why
 
 ![](assets/archlens-diff-at-pr-time.png)
 
 ![](assets/archlens-second-view-for-frienship-pr.png)
 Example from [PR #517 to zeeguu/api](https://github.com/zeeguu/api/pull/517#issuecomment-4188532557)
 
-## ArchLens as One Operationalization of the Idea
 
-[ArchLens](https://github.com/archlens/ArchLens) — a tool we've been developing here at ITU — implements this approach. You define module views in a lightweight specification file; a GitHub Action generates an architectural diff for every PR and posts it as a comment. Over time, the PR history becomes an annotated record of how the architecture evolved — and why.
+
 
 The broader goal: make architecture a **first-class artifact** in the development loop, not a stale document that occasionally gets refreshed.
 
 
+
+# To Think About 
+ 
+- **Non-e-type systems.** *Are there programs that are not impacted by the change in the world around them?* Candidates: a chess engine, a red-black tree balancing algorithm. One could argue this is the difference between *algorithms* and *software systems*: algorithms don't have to change with the world, software systems do. 
+
+- **Socio-technical angle.** The same VCS data can reveal *who* knows what about the system, not just *where* change concentrates. See [Code Ownership and Truck Factor](code_ownership.md) for Git-Truck and the Avelino paper — related but outside today's architecture-recovery focus.
+
+- What if you could replay the history of a system from the beginning but only showing those files that made it to the end. So project the beginnings through the perspective of the endings. Would that be a useful way of focusing on the most relevant aspects of the system? 
+
+- What happens if you combine your static analysis, and abstraction with LLMs - a project that only uses LLMs is [gitdiagram](https://github.com/ahmedkhaleel2004/gitdiagram) - this could be a thesis project actually!
+
 # For Your Projects
 
-## Consider enriching your architectural views with evolutionary signals
+## Think about enriching your architectural views with evolutionary signals
 - **Churn** — highlight the architecturally volatile parts
 - **Logical coupling** — surface implicit dependencies that static analysis missed
 - **Commit messages** — mine them for architectural intent, especially where code-level docs are sparse
@@ -217,15 +240,6 @@ The broader goal: make architecture a **first-class artifact** in the developmen
 - Also, I will provide feedback on the views in that channel 
 
 
-
-# To Think About 
- 
-
-- **Non-e-type systems.** *Are there programs that are not impacted by the change in the world around them?* Candidates: a chess engine, a red-black tree balancing algorithm. One could argue this is the difference between *algorithms* and *software systems*: algorithms don't have to change with the world, software systems do. 
-
-- **Socio-technical angle.** The same VCS data can reveal *who* knows what about the system, not just *where* change concentrates. See [Code Ownership and Truck Factor](code_ownership.md) for Git-Truck and the Avelino paper — related but outside today's architecture-recovery focus.
-
-- What if you could replay the history of a system from the beginning but only showing those files that made it to the end. So project the beginnings through the perspective of the endings. Would that be a useful way of focusing on the most relevant aspects of the system? 
 
 # References
 
