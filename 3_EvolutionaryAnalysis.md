@@ -9,7 +9,8 @@ Mircea Lungu (mlun@itu.dk)
 > -- Heraclitus
 
 
-As opposed to life, in software we record the changes. Can we use them for something? Can we use them for Architecture Recovery? The answer is in todays' lecture. 
+As opposed to life, in software we record the changes. Can we use them for Architecture Recovery? Can we use them for architecture evolution? 
+The answer is in todays' lecture. 
 
 
 
@@ -37,9 +38,16 @@ Three forces drive the evolution of a software system: the **human context** of 
 
 To think about: *Do you have good examples of systems that had to change because the real world changed around them?* 
 
-- the software that computes taxes in Denmark
-- all the websites in Europe once GDPR came into being
-- etc. 
+<details>
+<summary>Examples (click to reveal)</summary>
+
+- **Tax software** — has to track legal changes in its country every year
+- **Banking systems after PSD2 (EU, 2018)** — forced to expose core banking APIs to third-party fintechs; a deep architectural overhaul of legacy cores
+- **Video-conferencing at COVID onset** — Zoom went from ~10M to ~300M daily users in a few months, forcing a major re-architecture for 20×+ load
+- **Mobile advertising after Apple's App Tracking Transparency (2021)** — attribution pipelines had to be rebuilt industry-wide, essentially overnight
+- **Every website in Europe after GDPR** — even if a lot of it was compliance theater
+
+</details>
 
 ### The Technical Context Changes: Dependencies and Languages Keep Moving
 
@@ -131,12 +139,6 @@ Indeed, even if there is no separate documentation, well described commits can s
 However, the information in the git log could be useful for architecture recovery, only if the developers wrote meaningful messages. 
 
 
-
-
-
-
-
-
 ## Architectural Volatility
 
 Churn reveals which parts of the system are architecturally **volatile** — still being actively designed, extended, or corrected — versus which have **settled** into a stable form. 
@@ -177,10 +179,6 @@ Aggregating churn along the module hierarchy gives us an **evolutionary hotspots
 This is the same extract → abstract move we saw in Week 2: raw per-file measurements rolled up along the module hierarchy to produce something architecturally meaningful.
 
 Notebook: [Abstracting Churn Along the Module Hierarchy in Python](https://colab.research.google.com/drive/1T4Hj12uD6h5Ody4ietooe5nW-yGFCoX9?usp=sharing)
-
-
-
-
 
 # Embracing Evolution: Making Architectural Change Visible in Every PR
 
