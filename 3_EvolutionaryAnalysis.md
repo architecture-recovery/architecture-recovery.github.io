@@ -132,13 +132,21 @@ Defining the concept in practice is a challenge — it's a matter of selecting t
 
 ### Commit messages as evolving architecture documentation
 
-One of the beautiful insights I recently had is the importance of the git messages associated to commits as documentation. 
+Well-described commit messages can serve as an **evolving documentation** for a software system — especially when no separate architectural documentation exists.
 
-Indeed, even if there is no separate documentation, well described commits can serve as an evolving documentation for a software system. Look at the following commit comment, from linux, which documents a (+9, -4) change. How many of us are able to write such detailed changes?
+#### Why they're valuable: committed alongside the code
+
+Because commit messages are written *with* the change they describe, they have a property that traditional architecture documentation lacks: they don't drift out of sync with reality. A diagram in a wiki can be stale within weeks; a commit message is a frozen record of intent at the moment of the change.
+
+#### Example: the Linux kernel
+
+Look at the following commit comment from Linux, which documents a (+9, -4) change. How many of us are able to write such detailed messages?
 
 ![](images/commit-comment-in-linux.png)
 
-However, the information in the git log could be useful for architecture recovery, only if the developers wrote meaningful messages. 
+#### Limitation: only as good as the messages themselves
+
+The git log is only useful for architecture recovery to the extent that developers wrote meaningful messages. A log full of "fix" or "updates" tells you nothing about architectural intent.
 
 
 ## Architectural Volatility
