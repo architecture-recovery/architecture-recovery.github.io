@@ -1,4 +1,4 @@
-# III: Evolutionary Analysis for Architecture Recovery
+# III: Evolutionary analysis for architecture recovery
 
 Mircea Lungu (mlun@itu.dk) 
 
@@ -11,7 +11,7 @@ Mircea Lungu (mlun@itu.dk)
 *As opposed to life, in software we record the changes. Can we use them for Architecture Recovery? Can we use them for architecture evolution?* 
 
 
-# Software Evolution: The System Is Never Finished
+# Software evolution: the system is never finished
 
 Software evolution is **the continual development of a piece of software after its initial release to address changing stakeholder requirements**.
 
@@ -19,7 +19,7 @@ Software evolution is **the continual development of a piece of software after i
 - Nowadays evolution is the preferred term because it highlights the fact that a software system is never *finished*
 
 
-## Why Are Software Systems Never Finished? Lehman's E-Type Thesis
+## Why are software systems never finished? Lehman's E-type thesis
 
 > *An e-type program that is used in a real-world environment must change, or become progressively less useful in that environment.* 
 > 
@@ -30,7 +30,7 @@ In the terminology of Lehman, the "e" in *e-type* stands for *embedded*. He mean
 Three forces drive the evolution of a software system: the **human context** of use, the **technical context** of the platform, and our own **evolving understanding** of the problem. 
 
 
-### The Human Context Changes: Laws, Taxes, Regulations
+### The human context changes: laws, taxes, regulations
 
 To think about: *Do you have good examples of systems that had to change because the real world changed around them?* 
 
@@ -45,11 +45,11 @@ To think about: *Do you have good examples of systems that had to change because
 
 </details>
 
-### The Technical Context Changes: Dependencies and Languages Keep Moving
+### The technical context changes: dependencies and languages keep moving
 
 ![](images/red-queen-quote.png)
 
-#### Libraries and Languages Change Constantly — Fall Behind and Things Break
+#### Libraries and languages change constantly — fall behind and things break
 
 Libraries, frameworks, and programming languages all release new versions. Fall behind on your language version and upstream libraries eventually drop support for it — and your code stops working.
 
@@ -57,20 +57,25 @@ Libraries, frameworks, and programming languages all release new versions. Fall 
 
 
 
-### Our Understanding of the Problem Changes: We Learn by Building
+### Our understanding of the problem changes: we learn by building
 
-As we build a system, our understanding of the problem domain deepens. Users reveal what they actually meant. Edge cases that were invisible on day one become obvious on day ninety. Early abstractions that looked right turn out to be wrong in ways only visible in hindsight.
+> "*Writing is nature's way of letting you know how sloppy your thinking is.*" — Richard Guindon
 
-Every time the team learns something new about the problem, the system has to bend to match. This force is strongest while the domain model is still taking shape — which makes it the *dominant* driver of architectural change in young systems, or whenever a team enters a new domain.
+- As we build a system, our understanding of the problem domain deepens. 
+	- Users reveal what they actually meant. 
+	- Edge cases that were invisible on day one become obvious on day ninety. 
+	- Early abstractions that looked right turn out to be wrong in ways only visible in hindsight.
+
+This is, incidentally, **Ward Cunningham's original meaning of technical debt**: not sloppy code or shortcuts, but the accumulating gap between what the team understood when they shipped and what they understand now. 
 
 
-
-## Architecture Evolves Too — and Not Only Through Drift
+## Architecture evolves too — and not only through drift
 
 In Week 1 we talked about **drift** and **erosion** — the ways architecture degrades *unintentionally* over time. 
 
 But architecture also evolves in the opposite direction: through **deliberate upgrades and redesigns**, as the team's understanding of the problem matures or the context shifts.
 
+### Here software architecture is very different than building architecture 
 From this POV, the **architecture metaphor might not be the best** — because it makes us think about a fixed structure, as we normally have in building architecture. Although, even buildings are changing. 
 
 Stewart Brand's *How Buildings Learn* shows this with examples: buildings are constantly adapted throughout their lives, and so are software systems.
@@ -82,7 +87,7 @@ Stewart Brand's *How Buildings Learn* shows this with examples: buildings are co
 *If architecture evolves whether we track it or not, the question becomes: how do we stay aware of that evolution in time to shape it? We'll return to this at the end of today's lecture.*
 
 
-# From Source to History: What VCS Tells Us About the Architecture
+# From source to history: what VCS tells us about the architecture
 
 In Week 2 we extracted low-level dependencies from source code and abstracted them up into architecturally meaningful views. Today we apply the same pattern to a new source: the **version control history**. The low-level atoms are now **commits** — who changed what, when, with what message.
 
@@ -97,34 +102,35 @@ Three kinds of architecturally-relevant information can be recovered from a vers
 
 ## Implicit Dependencies
 
-### Logical Coupling: the parts of the system that always change together 
+### Logical coupling: the parts of the system that always change together 
 
-When two entities *frequently* change together, even if there is no explicit dependency between them, we call that between them there is **logical coupling**. 
+When two entities *frequently* change together, even if there is no explicit dependency between them, we say there is **logical coupling** between them. This information can be inferred from the version control.
 
-This information can be inferred from the version control. The concept was introduced in 1998 in [a paper](https://plg.uwaterloo.ca/~migod/846/papers/gall-coupling.pdf) by Gall et al. has become quite popular in the meantime. 
+#### Origin: Gall et al. 1998, popular since
 
-Adam Tornhill has a tool that computes it and wrote a book about many of the concepts discussed in this course. Other tools that compute it exist. 
+The concept was introduced in 1998 in [a paper](https://plg.uwaterloo.ca/~migod/846/papers/gall-coupling.pdf) by Gall et al. and has become quite popular since. Adam Tornhill has a tool that computes it and wrote a book about many of the concepts discussed in this course. Other tools exist.
 
-However, defining the concept is a challenge, because it's after all a matter of selecting thresholds and constants: 
+#### Defining coupling requires choosing thresholds
+
+Defining the concept in practice is a challenge — it's a matter of selecting thresholds and constants:
 - how many changes should two entities have together before we call them coupled?
-- what percentage of changes can be not *together* while still allowing us to consider them coupled?
+- what percentage of changes can be *not together* while still allowing us to consider them coupled?
 
-Pros
+#### Strengths
 
-- language-independent method 
-- can even detect dependencies between parts of the code that are not written in the same language
-- can detect dependencies that are indirect 
+- language-independent method
+- can detect dependencies *across* languages
+- can detect *indirect* dependencies
 
+#### Limitations
 
-Cons
-
-- only a small part of the dependencies can be detected this way
+- captures only a small part of the total dependency graph
 
 
 
 ## Living Documentation
 
-### Commit Messages as Evolving Architecture Documentation
+### Commit messages as evolving architecture documentation
 
 One of the beautiful insights I recently had is the importance of the git messages associated to commits as documentation. 
 
@@ -141,7 +147,7 @@ Churn reveals which parts of the system are architecturally **volatile** — sti
 
 This matters because volatility concentrates bugs, complexity, and future effort.
 
-### Extract: Churn as a Metric on Individual Code Entities
+### Extract: churn as a metric on individual code entities
 
 **[Churn](https://linearb.io/blog/what-is-code-churn/) is a metric that indicates how often a given piece of code gets edited.**
  - process metric (*as opposed to? do you remember the alternate concept? *)
@@ -154,7 +160,7 @@ This matters because volatility concentrates bugs, complexity, and future effort
 - It's likely that they'll require more effort in the future (e.g. yesterday's weather [Girba et al.])
 - Are likely to be most important parts of the code if there is the most work done on them
 
-#### Caveats When Using Churn
+#### Caveats when using churn
 
 **Input — what goes into the churn calculation**
 
@@ -168,7 +174,7 @@ This matters because volatility concentrates bugs, complexity, and future effort
 3. **Developer styles vary** — the micro-commits developer vs. the large-chunk committer. You could use LOC changed instead of commit count. (*What could the problems with this be?*)
 4. **Time interval matters.** Weight recent changes more heavily — a module that churned wildly three years ago but is stable now is not a current hotspot.
 
-### Abstract: Evolutionary Hotspots as an Architectural Viewpoint
+### Abstract: evolutionary hotspots as an architectural viewpoint
 
 Aggregating churn along the module hierarchy gives us an **evolutionary hotspots** view — an architectural viewpoint that highlights the code entities (modules, packages, subsystems) with the highest cumulative churn.
 
@@ -176,13 +182,13 @@ This is the same extract → abstract move we saw in Week 2: raw per-file measur
 
 Notebook: [Abstracting Churn Along the Module Hierarchy in Python](https://colab.research.google.com/drive/1T4Hj12uD6h5Ody4ietooe5nW-yGFCoX9?usp=sharing)
 
-# Embracing Evolution: Making Architectural Change Visible in Every PR
+# Embracing evolution: making architectural change visible in every PR
 
 If architecture evolves whether we track it or not — and we've argued it does — then the practical question becomes: *how do we stay aware of that evolution in time to shape it?*
 
 Traditional architecture documentation loses the race. By the time a diagram gets updated, the architecture has already moved on. Churn and hotspot analyses are retrospective — useful for understanding *what happened*, but too late to influence the decisions that produced the change.
 
-## The Idea: Architectural Diff at Review Time
+## The idea: architectural diff at review time
 
 ### What if architectural change were surfaced at the same moment as the code change — in the pull request itself? 
 
@@ -190,7 +196,7 @@ Traditional architecture documentation loses the race. By the time a diagram get
 - Accidental drift becomes visible the moment it's introduced or **soon thereafter**
 - Still we don't have hard rules - like in architectural description languages 
 
-## ArchLens as One Possible Operationalization of the Idea
+## ArchLens as one possible operationalization of the idea
 
 [ArchLens](https://github.com/archlens/ArchLens) — a tool we've been developing here at ITU — implements this approach. 
 
