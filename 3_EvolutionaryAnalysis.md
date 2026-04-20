@@ -43,7 +43,7 @@ To think about: *Do you have good examples of systems that had to change because
 
 ### The Technical Context Changes: Dependencies and Languages Keep Moving
 
-![](assets/red-queen-quote.png)
+![](images/red-queen-quote.png)
 
 #### Libraries and Languages Change Constantly — Fall Behind and Things Break
 
