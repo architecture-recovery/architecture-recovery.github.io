@@ -6,5 +6,5 @@ Lecture notes for Mircea's four week arc in the Software Architecture course at 
 
 1. [Introduction](1_Introduction.md)
 2. [Abstraction & Visualization](2_Abstraction.md)
-3. Dynamic Analysis
-4. Evolutionary Analysis
+3. Evolutionary Analysis
+4. Dynamic Analysis
