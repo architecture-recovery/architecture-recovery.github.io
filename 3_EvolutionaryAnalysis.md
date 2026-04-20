@@ -205,9 +205,9 @@ Traditional architecture documentation loses the race. By the time a diagram get
 - A GitHub Action generates an architectural diff for every PR and posts it as a comment
 - Over time, the PR history becomes an annotated record of how the architecture evolved — and why
 
-![](assets/archlens-diff-at-pr-time.png)
+![](images/archlens-diff-at-pr-time.png)
 
-![](assets/archlens-second-view-for-frienship-pr.png)
+![](images/archlens-second-view-for-frienship-pr.png)
 Example from [PR #517 to zeeguu/api](https://github.com/zeeguu/api/pull/517#issuecomment-4188532557)
 
 
