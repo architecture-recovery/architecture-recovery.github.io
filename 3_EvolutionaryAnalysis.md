@@ -192,28 +192,26 @@ Traditional architecture documentation loses the race. By the time a diagram get
 
 ### What if architectural change were surfaced at the same moment as the code change — in the pull request itself? 
 
-- Reviewers can reason about architectural impact *alongside* the code diff, not after the fact. 
-- Deliberate evolution becomes the default. 
-- Accidental drift becomes visible the moment it's introduced.
+- Reviewers can **reason about architectural impact *alongside* the code diff**, not after the fact. 
+- Accidental drift becomes visible the moment it's introduced or **soon thereafter**
+- Still we don't have hard rules - like in architectural description languages 
 
 ## ArchLens as One Possible Operationalization of the Idea
 
 [ArchLens](https://github.com/archlens/ArchLens) — a tool we've been developing here at ITU — implements this approach. 
 
 - You define module views in a lightweight specification file
-- You can get Interactive Architectural Views in your IDE (courtesy of Casper and Sebastian)
-- A GitHub Action generates an architectural diff for every PR and posts it as a comment
-- Over time, the PR history becomes an annotated record of how the architecture evolved — and why
+- You can get Interactive Architectural Views in your IDE (courtesy of Casper and Sebastian BSc Thesis!)
+- You get support for .Net and Java and a few other languages (courtesy of Babette and Lotte's MSc Thesis!)
+- A GitHub Action generates an architectural diff for every PR and posts it as a comment 
 
 ![](images/archlens-diff-at-pr-time.png)
 
-![](images/archlens-second-view-for-frienship-pr.png)
 Example from [PR #517 to zeeguu/api](https://github.com/zeeguu/api/pull/517#issuecomment-4188532557)
 
 
 
-
-The broader goal: make architecture a **first-class artifact** in the development loop, not a stale document that occasionally gets refreshed.
+**The broader goal**: make the architecture view a **first-class artifact** in the development loop, not a stale document that occasionally gets refreshed.
 
 
 
