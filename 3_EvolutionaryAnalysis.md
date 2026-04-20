@@ -168,7 +168,7 @@ This matters because volatility concentrates bugs, complexity, and future effort
 - It's likely that they'll require more effort in the future (e.g. yesterday's weather [Girba et al.])
 - Are likely to be most important parts of the code if there is the most work done on them
 
-### Abstract: evolutionary hotspots as an architectural viewpoint
+### Abstract: "Evolutionary Hotspots" as an architectural viewpoint
 
 Aggregating churn along the module hierarchy gives us an **evolutionary hotspots** view — an architectural viewpoint that highlights the code entities (modules, packages, subsystems) with the highest cumulative churn.
 
@@ -209,10 +209,9 @@ Traditional architecture documentation loses the race. By the time a diagram get
 [ArchLens](https://github.com/archlens/ArchLens) — a tool we've been developing here at ITU — implements this approach. 
 
 - You define module views in a lightweight specification file
-- You can get Interactive Architectural Views in your IDE (courtesy of Casper and Sebastian BSc Thesis!)
-![](images/archlens-interactive.png)
-- You get support for .Net and Java and a few other languages (courtesy of Babette and Lotte's MSc Thesis!)
-- A GitHub Action generates an architectural diff for every PR and posts it as a comment 
+- You can get **Interactive Architectural Views in your IDE** (courtesy of Casper and Sebastian BSc Thesis!)
+- You get **support for .Net and Java and a few other languages** (courtesy of Babette and Lotte's MSc Thesis!)
+- A **GitHub Action generates an architectural diff for every PR** and posts it as a comment 
 
 ![](images/archlens-diff-at-pr-time.png)
 
@@ -263,15 +262,20 @@ What other impacts should we be aware of?
 
 # For Your Projects
 
+## Post your abstracted views in the new channel as you produce them
+- Voluntary
+- Seeing peer work helps — both for cross-pollination and for building a shared vocabulary across the class. 
+- Also, I will provide feedback on the views in that channel 
+
 ## Think about enriching your architectural views with evolutionary signals
 - **Churn** — highlight the architecturally volatile parts
 - **Logical coupling** — surface implicit dependencies that static analysis missed
 - **Commit messages** — mine them for architectural intent, especially where code-level docs are sparse
 
-## Post your abstracted views in the new channel as you produce them
-- Voluntary
-- Seeing peer work helps — both for cross-pollination and for building a shared vocabulary across the class. 
-- Also, I will provide feedback on the views in that channel 
+## DO THIS! 
+- Notebook: [Abstracting Churn Along the Module Hierarchy in Python](https://colab.research.google.com/drive/1T4Hj12uD6h5Ody4ietooe5nW-yGFCoX9?usp=sharing)
+
+
 
 
 
